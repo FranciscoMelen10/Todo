@@ -3,9 +3,9 @@
 // React and Next
 import * as React from "react";
 
-// Components 
+// Components
 import Input from "./Input";
-import Link from "next/link";
+import Register from "./register";
 
 // Components Shadcn
 import { Button } from "@/components/ui/button";
@@ -16,22 +16,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-
-// Hooks
-import { useRouter } from "next/navigation";
+import { DialogTrigger } from "./ui/dialog";
 
 // Libraries
 import { useFormik } from "formik";
+import { useTransitionRouter } from "next-view-transitions";
 
 // Types
-import { User } from "@/types";
+import { UserValidation } from "@/utils/types";
 
+// Utils
+import validateEmailAndPassword from "@/utils/validations";
 export default function Login() {
-  const { toast } = useToast();
-  const router = useRouter();
-
-  type UserValidation = Pick<User, "email" | "password">;
+  const router = useTransitionRouter();
 
   const formik = useFormik<UserValidation>({
     initialValues: {
@@ -39,42 +36,10 @@ export default function Login() {
       password: "",
     },
     onSubmit: (values) => {
-      // Validación de email
-      if (!values.email) {
-        toast({
-          title: "Email is required",
-          variant: "destructive",
-          duration: 2000,
-        });
-        return;
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      ) {
-        toast({
-          title: "Invalid email address",
-          variant: "destructive",
-          duration: 2000,
-        });
-        return;
+      if (validateEmailAndPassword(values)) {
+        console.log(values);
+        router.push("/Home");
       }
-
-      // Validación de password
-      if (!values.password) {
-        toast({
-          title: "Password is required",
-          variant: "destructive",
-          duration: 2000,
-        });
-        return;
-      } else if (values.password.length < 8) {
-        toast({
-          title: "Password must be at least 8 characters long",
-          variant: "destructive",
-          duration: 2000,
-        });
-        return;
-      }
-      router.push("/Home");
     },
   });
 
@@ -94,26 +59,27 @@ export default function Login() {
               <Input
                 name="Email"
                 id="email"
-                type="email"
                 handleChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
+                isPassword={false}
               />
               <Input
                 name="Password"
                 id="password"
-                type="password"
                 handleChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
+                isPassword={true}
               />
-              <Link
-                href="/register"
-                className="text-sm text-blue-600 dark:text-blue-400"
-              >
-                Register a user
-              </Link>
-              <Button type="submit">Deploy</Button>
+              <Register>
+                <DialogTrigger asChild>
+                  <Button variant="secondary" className="bg-blue-600 dark:bg-blue-600 text-white dark:text-white hover:bg-blue-500">
+                    Create a user
+                  </Button>
+                </DialogTrigger>
+              </Register>
+              <Button type="submit">Confirm</Button>
             </div>
           </form>
         </CardContent>
