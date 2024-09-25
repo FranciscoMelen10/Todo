@@ -12,6 +12,9 @@ import { Toaster } from "@/components/ui/toaster";
 // Context
 import { ThemeProvider } from "@/context/ThemeContext";
 
+// Library
+import { ViewTransitions } from "next-view-transitions";
+
 const getSarai = Saira({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -28,18 +31,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={getSarai.className}>
-        <ThemeProvider>
-          <main className="min-h-screen bg-slate-100 dark:bg-black">
-            {children}
-            <div className="absolute bottom-0 right-0 p-5">
-              <Theme />
-            </div>
-          </main>
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={getSarai.className}>
+          <ThemeProvider>
+            <main className="min-h-screen bg-slate-100 dark:bg-black">
+              {children}
+              <div className="absolute bottom-0 right-0 p-5">
+                <Theme />
+              </div>
+            </main>
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

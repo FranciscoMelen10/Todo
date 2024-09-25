@@ -7,11 +7,11 @@ export type ThemeContextType = {
 
 export type InputProps = {
   name: string;
-  type: string;
   id: string;
   value: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  isPassword?: boolean;
 };
 
 export interface Todo {
@@ -28,3 +28,5 @@ export interface User {
   password: string;
   todos: Todo[];
 }
+
+export type UserValidation = Pick<User, "email" | "password">;

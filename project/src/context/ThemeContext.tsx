@@ -2,7 +2,7 @@
 
 import React, { createContext, useEffect } from "react";
 
-import { Theme, ThemeContextType } from "@/types";
+import { Theme, ThemeContextType } from "@/utils/types";
 
 // Crear el contexto con valor inicial undefined
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
