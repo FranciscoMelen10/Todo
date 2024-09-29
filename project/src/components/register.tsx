@@ -21,9 +21,9 @@ import { UserValidation } from "@/utils/types";
 
 // Utils
 import validateEmailAndPassword from "@/utils/validations";
+import Logo from "./Logo";
 
 export default function Register({ children }: { children: React.ReactNode }) {
-
   const formik = useFormik<UserValidation>({
     initialValues: {
       email: "",
@@ -40,7 +40,8 @@ export default function Register({ children }: { children: React.ReactNode }) {
     <Dialog>
       {children}
       <DialogContent className="sm:max-w-[425px] dark:text-white">
-        <DialogHeader>
+        <DialogHeader className="flex items-center justify-center text-center gap-4">
+          <Logo />
           <DialogTitle>Create profile</DialogTitle>
           <DialogDescription>
             You can create a new profile here. Click save when you're done.
@@ -54,7 +55,6 @@ export default function Register({ children }: { children: React.ReactNode }) {
               handleChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              isPassword={false}
             />
             <Input
               name="Password"
@@ -62,9 +62,9 @@ export default function Register({ children }: { children: React.ReactNode }) {
               handleChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
-              isPassword={true}
-            />
-            <Button type="submit">Confirm</Button>
+              inputType="password"
+              />
+            <Button type="submit">Register</Button>
           </div>
         </form>
       </DialogContent>

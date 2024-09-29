@@ -9,17 +9,27 @@ export type InputProps = {
   name: string;
   id: string;
   value: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  isPassword?: boolean;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  inputType?: "text" | "password" | "textarea";
 };
+
+export type State = "completed" | "in progress" | "canceled";
 
 export interface Todo {
   id: number;
   task: string;
   description: string;
-  completed: "completed" | "in progress" | "not completed" | "canceled";
+  state: State;
   date: string;
+}
+
+export interface TodoAction extends Todo {
+  isModalOpen: boolean;
+  onClose: () => void;
+  actions: (todo: any) => void | undefined;
 }
 
 export interface User {

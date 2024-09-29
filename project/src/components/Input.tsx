@@ -8,7 +8,7 @@ export default function Input({
   value = "",
   id = "",
   onBlur,
-  isPassword = false,
+  inputType = "text",
 }: InputProps) {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
@@ -20,15 +20,28 @@ export default function Input({
     <>
       <span className="font-light text-sm">{name}</span>
       <label className="flex justify-between gap-1 border-[1px] dark:border-white rounded-md p-1">
-        <input
-          className="bg-transparent border-none w-full dark:text-white focus:outline-none"
-          id={id}
-          type={isPassword && showPassword ? "password" : "text"}
-          onChange={handleChange}
-          value={value}
-          onBlur={onBlur}
-        />
-        {isPassword &&
+        {inputType === "textarea" ? (
+          <textarea
+            className="bg-transparent border-none w-full dark:text-white focus:outline-none max-h-[100px]"
+            id={id}
+            onChange={handleChange}
+            value={value}
+            onBlur={onBlur}
+          />
+        ) : (
+          <input
+            className="bg-transparent border-none w-full dark:text-white focus:outline-none"
+            id={id}
+            type={
+              inputType === "password" && showPassword ? "password" : "text"
+            }
+            onChange={handleChange}
+            value={value}
+            onBlur={onBlur}
+          />
+        )}
+
+        {inputType === "password" &&
           (!showPassword ? (
             <svg
               onClick={togglePassword}

@@ -1,11 +1,19 @@
 import { toast } from "@/hooks/use-toast";
-import { UserValidation } from "./types";
+import { Todo, UserValidation } from "./types";
 
 export default function validateEmailAndPassword({
   email,
   password,
 }: UserValidation) {
-  // Validación de email
+  if (!email && !password) {
+    toast({
+      title: "Email and Password are required",
+      variant: "destructive",
+      duration: 2000,
+    });
+    return;
+  }
+
   if (!email) {
     toast({
       title: "Email is required",
@@ -38,5 +46,54 @@ export default function validateEmailAndPassword({
     });
     return;
   }
+  return true;
+}
+
+export function validateCreateTodo({ task, description }: Omit<Todo, "id">) {
+  if (!task && !description) {
+    toast({
+      title: "Task and Description are required",
+      variant: "destructive",
+      duration: 2000,
+    });
+    return;
+  }
+
+  if (!task) {
+    toast({
+      title: "Task is required",
+      variant: "destructive",
+      duration: 2000,
+    });
+    return;
+  }
+
+  if (!description) {
+    toast({
+      title: "Description is required",
+      variant: "destructive",
+      duration: 2000,
+    });
+    return;
+  }
+
+  if (task.length > 100) {
+    toast({
+      title: "Task must be less than 100 characters",
+      variant: "destructive",
+      duration: 2000,
+    });
+    return;
+  }
+
+  if (description.length > 500) {
+    toast({
+      title: "Description must be less than 500 characters",
+      variant: "destructive",
+      duration: 2000,
+    });
+    return;
+  }
+
   return true;
 }

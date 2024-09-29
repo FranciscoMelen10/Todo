@@ -27,6 +27,8 @@ import { UserValidation } from "@/utils/types";
 
 // Utils
 import validateEmailAndPassword from "@/utils/validations";
+import Logo from "./Logo";
+import { toast } from "@/hooks/use-toast";
 export default function Login() {
   const router = useTransitionRouter();
 
@@ -37,16 +39,22 @@ export default function Login() {
     },
     onSubmit: (values) => {
       if (validateEmailAndPassword(values)) {
-        console.log(values);
+        toast({
+          title: "Success login",
+          variant: "default",
+          duration: 2000,
+          className: "bg-green-500 text-white",
+        });
         router.push("/Home");
       }
     },
   });
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center">
+    <div className="min-h-screen w-screen flex items-center justify-center p-5">
       <Card className="w-[350px]">
-        <CardHeader>
+        <CardHeader className="flex items-center justify-center gap-3">
+          <Logo />
           <CardTitle>To-do made by FranciscoMelen10</CardTitle>
           <CardDescription>
             This application is a todo list that allows you to create, edit, and
@@ -62,7 +70,6 @@ export default function Login() {
                 handleChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
-                isPassword={false}
               />
               <Input
                 name="Password"
@@ -70,16 +77,19 @@ export default function Login() {
                 handleChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
-                isPassword={true}
+                inputType="password"
               />
+              <Button type="submit">Log In</Button>
               <Register>
                 <DialogTrigger asChild>
-                  <Button variant="secondary" className="bg-blue-600 dark:bg-blue-600 text-white dark:text-white hover:bg-blue-500">
-                    Create a user
+                  <Button
+                    variant="ghost"
+                    className="w-auto text-black font-medium dark:text-white hover:underline hover:text-blue-500 hover:bg-transparent dark:hover:text-blue-500 dark:hover:bg-transparent"
+                  >
+                    Don't have an account? Register
                   </Button>
                 </DialogTrigger>
               </Register>
-              <Button type="submit">Confirm</Button>
             </div>
           </form>
         </CardContent>
