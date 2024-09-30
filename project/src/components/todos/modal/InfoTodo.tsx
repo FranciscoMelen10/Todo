@@ -20,6 +20,10 @@ import { DeleteTodo } from "./DeleteTodo";
 // Libraries
 import { Calendar } from "lucide-react";
 
+// Custom Hooks
+import { useTodo } from "@/hooks/useTodo";
+import { toast } from "@/hooks/use-toast";
+
 export const InfoTodo = ({
   task,
   state,
@@ -31,6 +35,7 @@ export const InfoTodo = ({
 }: TodoAction) => {
   const [isEdit, setEdit] = useState<boolean>(false);
   const [isDeleted, setisDeleted] = useState<boolean>(false);
+  const { editTodo, removeTodo } = useTodo();
 
   return (
     <Dialog open={isModalOpen} onOpenChange={(isOpen) => !isOpen && onClose()}>
@@ -85,7 +90,14 @@ export const InfoTodo = ({
           isModalOpen={isEdit}
           onClose={() => setEdit(false)}
           actions={(todo) => {
-            console.log(todo);
+            editTodo(todo);
+            setEdit(false);
+            toast({
+              title: "Success editing task",
+              variant: "default",
+              duration: 2000,
+              className: "bg-green-500 text-white",
+            });
           }}
         />
 
@@ -94,7 +106,7 @@ export const InfoTodo = ({
           isModalOpen={isDeleted}
           onClose={() => setisDeleted(false)}
           actions={(todo_id) => {
-            alert("Id to delete: " + todo_id);
+            removeTodo(todo_id);
           }}
         />
       </DialogContent>

@@ -1,7 +1,7 @@
 "use client";
 
 // Custom Hook
-import { useTheme } from "@/hooks/UseTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 export default function Theme() {
   const { theme, handleTheme } = useTheme();

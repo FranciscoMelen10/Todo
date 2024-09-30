@@ -17,19 +17,19 @@ import Input from "./Input";
 import { useFormik } from "formik";
 
 // Types
-import { UserValidation } from "@/utils/types";
+import { User } from "@/utils/types";
 
 // Utils
 import validateEmailAndPassword from "@/utils/validations";
 import Logo from "./Logo";
 
 export default function Register({ children }: { children: React.ReactNode }) {
-  const formik = useFormik<UserValidation>({
+  const formik = useFormik<User>({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: (values: UserValidation) => {
+    onSubmit: (values: User) => {
       if (validateEmailAndPassword(values)) {
         console.log(values);
       }

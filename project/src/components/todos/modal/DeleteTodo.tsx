@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { toast } from "@/hooks/use-toast";
 
 // Types
 import { TodoAction } from "@/utils/types";
@@ -23,7 +24,7 @@ export const DeleteTodo = ({
 }: TodoActionDelete) => {
   return (
     <Dialog open={isModalOpen} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogContent className="sm:max-w-[500px] dark:text-white flex justify-center items-center flex-col">
+      <DialogContent className="sm:max-w-[400px] dark:text-white flex justify-center items-center flex-col">
         <DialogHeader>
           <DialogTitle className="text-2xl">
             Do you want to delete this task?
@@ -35,6 +36,11 @@ export const DeleteTodo = ({
             onClick={() => {
               actions(id); // Aquí llamamos a actions con el id
               onClose();
+              toast({
+                title: "Removing task",
+                variant: "destructive",
+                duration: 2000,
+              });
             }}
           >
             Delete

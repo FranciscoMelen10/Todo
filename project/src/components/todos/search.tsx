@@ -1,15 +1,12 @@
 "use client";
 import { useState } from "react";
-import { useTransitionRouter } from "next-view-transitions";
 import { Search } from "lucide-react";
 
 interface SearchProps {
-  title: string;
   placeholder: string;
 }
 
-function SearchComponent({ title, placeholder }: SearchProps) {
-  const navigation = useTransitionRouter();
+function SearchComponent({ placeholder }: SearchProps) {
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

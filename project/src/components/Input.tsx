@@ -17,12 +17,12 @@ export default function Input({
   };
 
   return (
-    <>
-      <span className="font-light text-sm">{name}</span>
+    <div>
+      <span className="text-sm">{name}</span>
       <label className="flex justify-between gap-1 border-[1px] dark:border-white rounded-md p-1">
         {inputType === "textarea" ? (
           <textarea
-            className="bg-transparent border-none w-full dark:text-white focus:outline-none max-h-[100px]"
+            className="bg-transparent border-none w-full dark:text-white focus:outline-none h-[100px]"
             id={id}
             onChange={handleChange}
             value={value}
@@ -81,6 +81,6 @@ export default function Input({
             </svg>
           ))}
       </label>
-    </>
+    </div>
   );
 }

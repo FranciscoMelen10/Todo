@@ -6,6 +6,7 @@ import * as React from "react";
 // Components
 import Input from "./Input";
 import Register from "./register";
+import Logo from "./Logo";
 
 // Components Shadcn
 import { Button } from "@/components/ui/button";
@@ -17,22 +18,28 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DialogTrigger } from "./ui/dialog";
+import { toast } from "@/hooks/use-toast";
 
 // Libraries
 import { useFormik } from "formik";
 import { useTransitionRouter } from "next-view-transitions";
 
 // Types
-import { UserValidation } from "@/utils/types";
+import { User } from "@/utils/types";
 
 // Utils
 import validateEmailAndPassword from "@/utils/validations";
-import Logo from "./Logo";
-import { toast } from "@/hooks/use-toast";
+
+// Custom hooks
+import { useUser } from "@/hooks/useUser";
+
+
 export default function Login() {
+  const { addUser } = useUser();
+
   const router = useTransitionRouter();
 
-  const formik = useFormik<UserValidation>({
+  const formik = useFormik<User>({
     initialValues: {
       email: "",
       password: "",
@@ -45,6 +52,7 @@ export default function Login() {
           duration: 2000,
           className: "bg-green-500 text-white",
         });
+        addUser(values);
         router.push("/Home");
       }
     },

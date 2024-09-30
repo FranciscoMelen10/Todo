@@ -16,7 +16,7 @@ import { TodoAction, Todo } from "@/utils/types";
 
 // Libraries
 import { useFormik } from "formik";
-import { validateCreateTodo } from "@/utils/validations";
+import { validateTodo } from "@/utils/validations";
 
 type CreateTodoProps = Omit<TodoAction, "task" | "state" | "description" | "date" | "id">;
 
@@ -41,7 +41,7 @@ export const CreateTodo = ({
       id: 0,
     },
     onSubmit: (values) => {
-      if (validateCreateTodo(values)) {
+      if (validateTodo(values)) {
         actions(values);
 
         // Clear form

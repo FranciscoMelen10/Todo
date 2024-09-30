@@ -33,10 +33,8 @@ export interface TodoAction extends Todo {
 }
 
 export interface User {
-  user_id: number;
+  user_id?: number;
   email: string;
   password: string;
-  todos: Todo[];
 }
 
-export type UserValidation = Pick<User, "email" | "password">;
