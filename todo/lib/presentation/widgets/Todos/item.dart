@@ -19,7 +19,7 @@ class ItemTodo extends StatelessWidget {
       margin: const EdgeInsets.only(top: 10),
       padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
+        border: Border.all(color: Theme.of(context).colorScheme.secondary),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -27,12 +27,17 @@ class ItemTodo extends StatelessWidget {
           Checkbox(
             value: todo.completed,
             onChanged: (_) => completedTodoList(todo.id, context),
+            fillColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              return Theme.of(context).colorScheme.secondary;
+            }),
           ),
           Expanded(
             child: Text(
               todo.tarea,
               style: TextStyle(
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.secondary,
                 fontSize: 18,
                 decoration:
                     todo.completed
@@ -45,13 +50,19 @@ class ItemTodo extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () => toastEditTodo(context, todo, todosProvider),
-                icon: Icon(Icons.edit),
+                icon: Icon(
+                  Icons.edit,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
               IconButton(
                 onPressed: () {
                   todosProvider.eliminateTodo(todo.id);
                 },
-                icon: Icon(Icons.delete),
+                icon: Icon(
+                  Icons.delete,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
             ],
           ),

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/presentation/screens/index.dart';
+import 'package:todo/provider/themeProvider.dart';
 import 'package:todo/provider/todoProvider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => Todoprovider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Todoprovider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ],
       child: const MainApp(),
     ),
   );
@@ -19,10 +23,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.light(primary: Colors.black),
-      ),
+      theme: Provider.of<ThemeProvider>(context).themeData,
       initialRoute: '/',
       routes: {
         '/': (context) => const Login(),

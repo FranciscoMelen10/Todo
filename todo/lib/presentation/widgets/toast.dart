@@ -23,7 +23,10 @@ Future<void> toastEditTodo(
             style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
-            child: const Text('Cancelar'),
+            child: Text(
+              'Cancelar',
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -32,7 +35,10 @@ Future<void> toastEditTodo(
             style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
-            child: const Text('Guardar'),
+            child: Text(
+              'Guardar',
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
             onPressed: () {
               if (newTodo.text.isEmpty) {
                 customAlert(
@@ -64,7 +70,10 @@ Future<void> customAlert(BuildContext context, String title, String message) {
             style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
-            child: const Text('Aceptar'),
+            child: Text(
+              'Aceptar',
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },

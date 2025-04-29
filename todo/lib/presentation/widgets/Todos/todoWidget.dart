@@ -13,7 +13,10 @@ class WidgetTodos extends StatelessWidget {
       child: ListView.builder(
         itemCount: todosProvider.todos.length,
         itemBuilder: (context, index) {
-          return ItemTodo(todo: todosProvider.todos[index], todosProvider: todosProvider,);
+          return ItemTodo(
+            todo: todosProvider.todos[index],
+            todosProvider: todosProvider,
+          );
         },
       ),
     );

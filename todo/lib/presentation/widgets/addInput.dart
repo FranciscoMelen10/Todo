@@ -19,8 +19,8 @@ class AddinputState extends State<Addinput> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black),
+        color: Theme.of(context).colorScheme.primary,
+        border: Border.all(color: Theme.of(context).colorScheme.secondary),
         borderRadius: BorderRadius.circular(8),
       ),
       padding: const EdgeInsets.only(left: 15),
@@ -37,7 +37,7 @@ class AddinputState extends State<Addinput> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(7),
                 bottomRight: Radius.circular(7),
@@ -45,7 +45,10 @@ class AddinputState extends State<Addinput> {
             ),
             child: IconButton(
               onPressed: widget.addTodo,
-              icon: Icon(Icons.add, color: Colors.white),
+              icon: Icon(
+                Icons.add,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
         ],
