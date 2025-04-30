@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/presentation/screens/index.dart';
-import 'package:todo/provider/themeProvider.dart';
-import 'package:todo/provider/todoProvider.dart';
+import 'package:todo/provider/theme_provider.dart';
+import 'package:todo/provider/todo_provider.dart';
 
 void main() {
   runApp(

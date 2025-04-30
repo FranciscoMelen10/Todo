@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/presentation/widgets/index.dart';
-import 'package:todo/provider/themeProvider.dart';
-import 'package:todo/provider/todoProvider.dart';
+import 'package:todo/provider/theme_provider.dart';
+import 'package:todo/provider/todo_provider.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -35,14 +35,16 @@ class Home extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: SvgPicture.asset(
-          'assets/images/logo.svg',
+          Theme.of(context).colorScheme.primary == Colors.white
+              ? 'assets/images/logo.svg'
+              : 'assets/images/logo_dark.svg',
           width: 80,
           height: 80,
           alignment: Alignment.center,
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             Addinput(controllerInput: controllerTask, addTodo: addTodoList),

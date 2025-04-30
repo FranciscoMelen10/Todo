@@ -18,7 +18,7 @@ class Login extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w800, fontSize: 38),
             ),
             Text(
-              "Elabored by FranciscoMelen10",
+              "Develop by FranciscoMelen10",
               style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
             ),
             SizedBox(height: 20),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/model/todo.dart';
-import 'package:todo/provider/todoProvider.dart';
+import 'package:todo/provider/todo_provider.dart';
 
 Future<void> toastEditTodo(
   BuildContext context,
